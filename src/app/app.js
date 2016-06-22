@@ -1,18 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import 'bootstrap/dist/js/bootstrap.min.js';
-import Hello from './components/hello';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import todoApp from './common/reducers/reducers';
+import App from './components/App';
 
-const rootEl = document.getElementById('app');
+const store = createStore(todoApp);
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="app container">
-       <Hello/>
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<App/>, rootEl);
+render(
+  <Provider store={store}>
+    <App/>
+  </Provider>,
+  document.getElementById('app')
+);
